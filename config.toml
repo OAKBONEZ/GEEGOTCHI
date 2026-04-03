@@ -1,0 +1,59 @@
+# Pwnagotchi Configuration with Fancygotchi Display
+# Target: Raspberry Pi 4B with Waveshare 2.8" Display
+# Created: April 2026
+
+[main]
+log_level = "INFO"
+workdir = "/home/pi/.pwn"
+data_dir = "/home/pi/.pwn/data"
+config_dir = "/etc/pwnagotchi"
+homedir = "/home/pi"
+tmpdir = "/tmp"
+
+# ── Whitelist Configuration ──────────────────────────────────────
+[main.whitelist]
+ssids = [
+  "Vegemite Virus Vault"
+]
+
+# ── Display Configuration ────────────────────────────────────────
+[ui]
+fps = 1
+animation_delay = 0.1
+
+[ui.display]
+enabled = true
+type = "waveshare_28v2"
+rotation = 0
+color = "black"
+
+# ── Fancygotchi Plugin Configuration ─────────────────────────────
+[main.plugins.fancygotchi]
+enabled = true
+theme = ""
+rotation = 0
+
+# ── WiFi & Network Configuration ─────────────────────────────────
+[main.interface_naming]
+mon = "mon0"
+man = "wlan0"
+
+[main.filters]
+whitelist = true
+
+# ── WebUI Configuration ──────────────────────────────────────────
+[webui]
+enabled = true
+address = "0.0.0.0"
+port = 8080
+username = ""
+password = ""
+ssl = false
+
+# ── Bluetooth Configuration (Optional) ────────────────────────────
+[main.plugins.bt_tether]
+enabled = false
+
+# ── Custom Plugins ───────────────────────────────────────────────
+[main.plugins]
+# Add custom plugins here
