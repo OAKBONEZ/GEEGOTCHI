@@ -1,59 +1,290 @@
-# Pwnagotchi Configuration with Fancygotchi Display
-# Target: Raspberry Pi 4B with Waveshare 2.8" Display
-# Created: April 2026
+# Pwnagotchi Configuration - GEEGOTCHI
+# Hardware: Raspberry Pi 4B + LCDwiki MPI2801 (ILI9341) 320x240
+# Theme: Fancygotchi Cyber Theme
+# NOTE: Sensitive values (passwords, SSIDs) replaced with placeholders
 
-[main]
-log_level = "INFO"
-workdir = "/home/pi/.pwn"
-data_dir = "/home/pi/.pwn/data"
-config_dir = "/etc/pwnagotchi"
-homedir = "/home/pi"
-tmpdir = "/tmp"
-
-# ── Whitelist Configuration ──────────────────────────────────────
-[main.whitelist]
-ssids = [
-  "Vegemite Virus Vault"
-]
-
-# ── Display Configuration ────────────────────────────────────────
 [ui]
 fps = 1
-animation_delay = 0.1
+invert = false
+cursor = true
 
 [ui.display]
 enabled = true
-type = "waveshare_28v2"
-rotation = 0
-color = "black"
-
-# ── Fancygotchi Plugin Configuration ─────────────────────────────
-[main.plugins.fancygotchi]
-enabled = true
-theme = ""
+type = "wavesharelcd2in4"
 rotation = 0
 
-# ── WiFi & Network Configuration ─────────────────────────────────
-[main.interface_naming]
-mon = "mon0"
-man = "wlan0"
+[ui.font]
+name = "DejaVuSansMono"
+size_offset = 0
 
-[main.filters]
-whitelist = true
+[ui.faces]
+look_r = "( ⚆_⚆)"
+look_l = "(☉_☉ )"
+look_r_happy = "( ◕‿◕)"
+look_l_happy = "(◕‿◕ )"
+sleep = "(⇀‿‿↼)"
+sleep2 = "(≖‿‿≖)"
+awake = "(◕‿‿◕)"
+bored = "(-__-)"
+intense = "(°▃▃°)"
+cool = "(⌐■_■)"
+happy = "(•‿‿•)"
+excited = "(ᵔ◡◡ᵔ)"
+grateful = "(^‿‿^)"
+motivated = "(☼‿‿☼)"
+demotivated = "(≖__≖)"
+smart = "(✜‿‿✜)"
+lonely = "(ب__ب)"
+sad = "(╥☁╥ )"
+angry = "(-_-')"
+friend = "(♥‿‿♥)"
+broken = "(☓‿‿☓)"
+debug = "(#__#)"
+upload = "(1__0)"
+upload1 = "(1__1)"
+upload2 = "(0__1)"
+png = false
+position_x = 0
+position_y = 34
 
-# ── WebUI Configuration ──────────────────────────────────────────
-[webui]
+[ui.web]
 enabled = true
-address = "0.0.0.0"
+address = "::"
+auth = false
+username = "changeme"
+password = "changeme"
+origin = ""
 port = 8080
-username = ""
-password = ""
-ssl = false
+on_frame = ""
 
-# ── Bluetooth Configuration (Optional) ────────────────────────────
-[main.plugins.bt_tether]
+[main]
+whitelist = ["YOUR_SSID_HERE"]
+name = "GEEGOTCHI"
+lang = "en"
+confd = "/etc/pwnagotchi/conf.d/"
+custom_plugin_repos = [
+  "https://github.com/jayofelony/pwnagotchi-torch-plugins/archive/master.zip",
+  "https://github.com/Sniffleupagus/pwnagotchi_plugins/archive/master.zip",
+  "https://github.com/NeonLightning/pwny/archive/master.zip",
+  "https://github.com/marbasec/UPSLite_Plugin_1_3/archive/master.zip",
+  "https://github.com/wpa-2/Pwnagotchi-Plugins/archive/master.zip"
+]
+custom_plugins = "/usr/local/share/pwnagotchi/custom-plugins/"
+iface = "wlan0mon"
+mon_start_cmd = "/usr/bin/monstart"
+mon_stop_cmd = "/usr/bin/monstop"
+mon_max_blind_epochs = 5
+no_restart = false
+
+[main.log]
+path = "/etc/pwnagotchi/log/pwnagotchi.log"
+path-debug = "/etc/pwnagotchi/log/pwnagotchi-debug.log"
+
+[main.log.rotation]
+enabled = true
+size = "10M"
+
+# ── Plugins ──────────────────────────────────────────────────────
+
+[main.plugins.Fancygotchi]
+enabled = true
+rotation = 90
+theme = "cyber"
+
+[main.plugins.auto-tune]
+enabled = true
+show_hidden = false
+reset_history = true
+extra_channels = 15
+show_interactions = false
+
+[main.plugins.auto-update]
+enabled = true
+install = true
+interval = 1
+token = ""
+
+[main.plugins.bt-tether]
+enabled = false
+phone-name = ""
+mac = ""
+phone = ""
+ip = ""
+gateway = ""
+dns = "8.8.8.8 1.1.1.1"
+
+[main.plugins.fix_services]
+enabled = true
+
+[main.plugins.gdrivesync]
+enabled = false
+backupfiles = [""]
+backup_folder = "PwnagotchiBackups"
+interval = 1
+
+[main.plugins.gpio_buttons]
 enabled = false
 
-# ── Custom Plugins ───────────────────────────────────────────────
-[main.plugins]
-# Add custom plugins here
+[main.plugins.gps]
+enabled = false
+speed = 19200
+device = "/dev/ttyUSB0"
+
+[main.plugins.gps_listener]
+enabled = false
+
+[main.plugins.grid]
+enabled = true
+report = true
+
+[main.plugins.logtail]
+enabled = true
+max-lines = 10000
+
+[main.plugins.memtemp]
+enabled = true
+scale = "celsius"
+orientation = "horizontal"
+
+[main.plugins.ohcapi]
+enabled = false
+api_key = ""
+receive_email = "yes"
+
+[main.plugins.pwndroid]
+enabled = false
+display = false
+display_altitude = false
+gateway = ""
+
+[main.plugins.pisugarx]
+enabled = false
+rotation = false
+default_display = "percentage"
+lowpower_shutdown = true
+lowpower_shutdown_level = 10
+max_charge_voltage_protection = false
+
+[main.plugins.session-stats]
+enabled = true
+save_directory = "/var/tmp/pwnagotchi/sessions/"
+
+[main.plugins.ups_hat_c]
+enabled = false
+label_on = true
+shutdown = 5
+bat_x_coord = 140
+bat_y_coord = 0
+
+[main.plugins.ups_lite]
+enabled = false
+shutdown = 2
+
+[main.plugins.webcfg]
+enabled = true
+username = "YOUR_USERNAME"
+password = "YOUR_PASSWORD"
+
+[main.plugins.webgpsmap]
+enabled = false
+
+[main.plugins.wigle]
+enabled = false
+api_key = ""
+donate = false
+cvs_dir = "/tmp"
+timeout = 30
+position = [7, 85]
+
+[main.plugins.wpa-sec]
+enabled = true
+api_key = ""
+api_url = "https://wpa-sec.stanev.org"
+download_results = false
+show_pwd = false
+single_files = false
+
+[main.plugins.auto_backup]
+enabled = true
+interval = "daily"
+max_tries = 0
+backup_location = "/home/pi/"
+files = [
+  "/root/settings.yaml",
+  "/root/client_secrets.json",
+  "/root/.api-report.json",
+  "/root/.ssh",
+  "/root/.bashrc",
+  "/root/.profile",
+  "/home/pi/handshakes",
+  "/root/peers",
+  "/etc/pwnagotchi/",
+  "/usr/local/share/pwnagotchi/custom-plugins",
+  "/etc/ssh/",
+  "/home/pi/.bashrc",
+  "/home/pi/.profile",
+  "/home/pi/.wpa_sec_uploads"
+]
+exclude = ["/etc/pwnagotchi/logs/*"]
+commands = ["tar cf {backup_file} {files}"]
+
+[main.plugins.cache]
+enabled = true
+
+[main.plugins.pwncrack]
+enabled = false
+key = ""
+
+[main.plugins.webssh]
+enabled = true
+
+[personality]
+advertise = true
+deauth = true
+associate = true
+channels = []
+min_rssi = -200
+ap_ttl = 120
+sta_ttl = 300
+recon_time = 30
+max_inactive_scale = 2
+recon_inactive_multiplier = 2
+hop_recon_time = 10
+min_recon_time = 5
+max_interactions = 3
+max_misses_for_recon = 5
+excited_num_epochs = 10
+bored_num_epochs = 15
+sad_num_epochs = 25
+bond_encounters_factor = 20000
+throttle_a = 0.4
+throttle_d = 0.9
+
+[bettercap]
+handshakes = "/home/pi/handshakes"
+silence = [
+  "ble.device.new", "ble.device.lost", "ble.device.disconnected",
+  "ble.device.connected", "ble.device.service.discovered",
+  "ble.device.characteristic.discovered", "wifi.client.new",
+  "wifi.client.lost", "wifi.client.probe", "wifi.ap.new",
+  "wifi.ap.lost", "mod.started"
+]
+
+[fs.memory]
+enabled = true
+
+[fs.memory.mounts.log]
+enabled = true
+mount = "/etc/pwnagotchi/log/"
+size = "50M"
+sync = 60
+zram = true
+rsync = true
+
+[fs.memory.mounts.data]
+enabled = true
+mount = "/var/tmp/pwnagotchi"
+size = "250M"
+sync = 3600
+zram = true
+rsync = true
