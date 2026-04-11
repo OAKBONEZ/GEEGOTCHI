@@ -67,7 +67,8 @@ custom_plugin_repos = [
   "https://github.com/Sniffleupagus/pwnagotchi_plugins/archive/master.zip",
   "https://github.com/NeonLightning/pwny/archive/master.zip",
   "https://github.com/marbasec/UPSLite_Plugin_1_3/archive/master.zip",
-  "https://github.com/wpa-2/Pwnagotchi-Plugins/archive/master.zip"
+  "https://github.com/wpa-2/Pwnagotchi-Plugins/archive/master.zip",
+  "https://github.com/AlienMajik/pwnagotchi_plugins/archive/master.zip"
 ]
 custom_plugins = "/usr/local/share/pwnagotchi/custom-plugins/"
 iface = "wlan0mon"
@@ -134,8 +135,8 @@ device = "/dev/ttyUSB0"
 enabled = false
 
 [main.plugins.grid]
-enabled = true
-report = true
+enabled = false
+report = false
 
 [main.plugins.logtail]
 enabled = true
@@ -150,6 +151,10 @@ orientation = "horizontal"
 enabled = false
 api_key = ""
 receive_email = "yes"
+
+[main.plugins.onlinehashcrack]
+enabled = false
+api_key = ""
 
 [main.plugins.pwndroid]
 enabled = false
@@ -237,6 +242,36 @@ key = ""
 
 [main.plugins.webssh]
 enabled = true
+
+# ── AlienMajik Plugins ───────────────────────────────────────────
+
+[main.plugins.age]
+enabled = true
+age_x_coord = 0
+age_y_coord = 50
+str_x_coord = 0
+str_y_coord = 61
+epoch_x_coord = 0
+epoch_y_coord = 72
+netwk_x_coord = 0
+netwk_y_coord = 83
+bar_x_coord = 0
+bar_y_coord = 94
+
+[main.plugins.mad_hatter]
+enabled = true
+hat_x_coord = 140
+hat_y_coord = 0
+shutdown = 5
+
+[main.plugins.neurolyzer]
+enabled = true
+rotation_interval = 300
+stealth_mode = true
+noided_mode = false
+tx_power_min = 5
+tx_power_max = 20
+safe_channels = [1, 6, 11]
 
 [personality]
 advertise = true
